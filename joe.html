@@ -22,30 +22,26 @@
 
 <div class="container">
     <h2>Enter Password</h2>
-    <input type="text" id="passwordInput" placeholder="Enter password" onkeypress="handleKeyPress(event)">
+    <input type="text" id="passwordInput" placeholder="Enter password">
     <button onclick="checkPassword()">Submit</button>
 
     <div id="result"></div>
 </div>
 
 <script>
-    const validPasswords = ["snappingturtle", "snapping turtle", "SNAPPINGTURTLE"];
+    let attempts = 0; // Initialize attempts counter
 
     function checkPassword() {
-        const passwordInput = document.getElementById('passwordInput').value.toLowerCase(); // Convert input to lowercase
+        const passwordInput = document.getElementById('passwordInput').value;
+        const validPasswords = ["snappingturtle", "snapping turtle", "SNAPPINGTURTLE"];
+        attempts++; // Increment attempts on each submission
 
-        if (validPasswords.map(p => p.toLowerCase()).includes(passwordInput)) { // Check against lowercase valid passwords
-            document.getElementById('result').innerText = "Password correct!";
+        if (validPasswords.includes(passwordInput)) {
+            document.getElementById('result').innerText = `Password correct! Attempts: ${attempts}`;
             document.getElementById('result').style.color = "green";
         } else {
-            document.getElementById('result').innerText = "Password incorrect!";
+            document.getElementById('result').innerText = `Password incorrect! Attempts: ${attempts}`;
             document.getElementById('result').style.color = "red";
-        }
-    }
-
-    function handleKeyPress(event) {
-        if (event.key === 'Enter') {
-            checkPassword(); // Call checkPassword on Enter key
         }
     }
 </script>
